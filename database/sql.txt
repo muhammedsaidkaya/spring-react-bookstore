@@ -1,0 +1,106 @@
+CREATE TABLE IF NOT EXISTS `user` (
+  `email` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  `password` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  `name` varchar(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `gender` tinyint(4) DEFAULT NULL,
+  `dob` date DEFAULT NULL,
+  `phone_first3` int(11) DEFAULT NULL,
+  `phone_rest` int(11) DEFAULT NULL,
+  `profil_pic` longblob,
+  `is_admin` tinyint(4) DEFAULT NULL,
+  primary key(`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `has_addresses`  (
+  `user_email` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  `address` varchar(255) COLLATE latin1_general_cs NOT NULL,
+	primary key(`user_email`,`address`),
+    foreign key(`user_email`) references user(email) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `logdb` (
+  `user_email` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  `start_date` datetime NOT NULL,
+  `end_date` datetime DEFAULT NULL,
+   primary key(`user_email`,`start_date`),
+   foreign key(`user_email`) references user(email) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE latin1_general_cs DEFAULT NULL,
+   primary key(`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `product` (
+  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `printer` varchar(255) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `writter` varchar(255) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `volume` int(11) NOT NULL,
+  `brief` varchar(320) COLLATE latin1_general_cs DEFAULT NULL,
+  `product_pic` varchar(255),
+  `cat_id` int(11) DEFAULT NULL,
+  `price` double DEFAULT NULL,
+  `stock` int(11) DEFAULT NULL,
+   primary key(`name`,`printer`,`writter`,`volume`),
+   foreign key(`cat_id`) references category(id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `bucket` (
+  `id` int(11) NOT NULL,
+  `user_email` varchar(255) COLLATE latin1_general_cs NOT NULL,
+   primary key(`id`,`user_email`),
+   foreign key(`user_email`) references user(email) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `includes_bucket` (
+  `user_email` varchar(255) COLLATE latin1_general_cs DEFAULT NULL,
+  `bucket_id` int(11) NOT NULL,
+  `product_name` varchar(255) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `product_printer` varchar(255) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `product_author` varchar(255) CHARACTER SET utf8 COLLATE utf8_turkish_ci NOT NULL,
+  `product_volume` int(11) NOT NULL,
+  `amount` int(11) DEFAULT NULL,
+  `unit_price` double DEFAULT NULL,
+  primary key(`user_email`,`bucket_id`,`product_name`,`product_printer`,`product_author`,`product_volume`),
+  foreign key(`user_email`,`bucket_id`) references bucket(user_email,id) ON DELETE CASCADE ON UPDATE CASCADE,
+  foreign key(`product_name`,`product_printer`,`product_author`,`product_volume`) references product(name,printer,writter,volume) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `payment` (
+  `user_email` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  `bucket_id` int(11) NOT NULL,
+  `payment_date` date DEFAULT NULL,
+  `payment_time` time DEFAULT NULL,
+  `total_price` double DEFAULT NULL,
+  `type` tinyint(1) DEFAULT NULL,
+  primary key(`user_email`,`bucket_id`),
+  foreign key(`user_email`,`bucket_id`) references bucket(user_email,id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `cc` (
+  `user_email` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  `bucket_id` int(11) NOT NULL,
+  `card_num` int(11) DEFAULT NULL,
+  `cvc` int(11) DEFAULT NULL,
+  primary key(`user_email`,`bucket_id`),
+  foreign key(`user_email`,`bucket_id`) references payment(user_email,bucket_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `pp` (
+  `user_email` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  `bucket_id` int(11) NOT NULL,
+  `acc_num` int(11) DEFAULT NULL,
+  primary key(`user_email`,`bucket_id`),
+  foreign key(`user_email`,`bucket_id`) references payment(user_email,bucket_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
+
+CREATE TABLE IF NOT EXISTS `shipmentstatus` (
+  `user_email` varchar(255) COLLATE latin1_general_cs NOT NULL,
+  `bucket_id` int(11) NOT NULL,
+  `stat_time` date DEFAULT NULL,
+  `stat` int(11) DEFAULT NULL,
+  `firm_code` varchar(255) COLLATE latin1_general_cs DEFAULT NULL,
+  primary key(`user_email`,`bucket_id`),
+  foreign key(`user_email`,`bucket_id`) references payment(user_email,bucket_id) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_general_cs;
