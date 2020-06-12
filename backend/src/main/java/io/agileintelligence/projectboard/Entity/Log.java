@@ -1,6 +1,6 @@
 package io.agileintelligence.projectboard.Entity;
 
-import io.agileintelligence.projectboard.EmbeddedPrimaryKey.AddressIdentifier;
+import io.agileintelligence.projectboard.EmbeddedPrimaryKey.LogIdentifier;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,11 +13,10 @@ import javax.persistence.Table;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "has_addresses")
-public class Address {
+@Table(name="logdb")
+public class Log {
 
     @EmbeddedId
-    private AddressIdentifier addressIdentifier;
-    private String address;
+    private LogIdentifier logIdentifier;
 
 }

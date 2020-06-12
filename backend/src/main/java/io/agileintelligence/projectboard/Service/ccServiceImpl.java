@@ -30,7 +30,7 @@ public class ccServiceImpl implements ccService {
     }
 
     @Override// Add new record to cc table with separate composite primary keys
-    public cc payWithCreditCard(String e_mail, int bucketId, int cardNum, int cvc){
+    public cc payWithCreditCard(String e_mail, int bucketId, String cardNum, int cvc){
         cc c = new cc(new paymentIden(e_mail,bucketId),cardNum,cvc);
         ccDAO.save(c);
         return c;

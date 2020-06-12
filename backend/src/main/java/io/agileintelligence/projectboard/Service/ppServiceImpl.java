@@ -31,7 +31,7 @@ public class ppServiceImpl implements ppService{
     }
 
     @Override// Add new record to pp table with separate composite primary keys
-    public pp payWithPayPal(String e_mail, int bucketId, int accNum){
+    public pp payWithPayPal(String e_mail, int bucketId, String accNum){
         pp p = new pp(new paymentIden(e_mail,bucketId),accNum);
         ppDAO.save(p);
         return p;

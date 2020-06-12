@@ -18,7 +18,7 @@ public interface ppService {
     Optional<pp> getPPInfo(paymentIden paymentIden);
 
     // Add new record to pp table with separate composite primary keys
-    pp payWithPayPal(String e_mail, int bucketId, int accNum);
+    pp payWithPayPal(String e_mail, int bucketId, String accNum);
 
     // Add new record to pp table with merged composite primary keys
     void payWithPayPal(pp pp);

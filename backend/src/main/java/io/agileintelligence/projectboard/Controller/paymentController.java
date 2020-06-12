@@ -2,10 +2,13 @@ package io.agileintelligence.projectboard.Controller;
 
 
 import io.agileintelligence.projectboard.EmbeddedPrimaryKey.paymentIden;
-import io.agileintelligence.projectboard.Entity.cc;
 import io.agileintelligence.projectboard.Entity.payment;
-import io.agileintelligence.projectboard.Entity.pp;
+import io.agileintelligence.projectboard.RequestBody.PaymentDTO;
+import io.agileintelligence.projectboard.RequestBody.ccDTO;
+import io.agileintelligence.projectboard.RequestBody.ppDTO;
+import io.agileintelligence.projectboard.RequestBody.statDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,13 +47,33 @@ public class paymentController {
     }
 
     @PostMapping("pay/c")
-    public void makePayment(@RequestBody cc cc){
-        paymentService.makePaymentWCC(cc);
+    public ResponseEntity makePayment(@RequestBody ccDTO cc)
+    {
+        PaymentDTO pay =paymentService.makePaymentWCC(cc);
+        if(pay==null){
+            return ResponseEntity.badRequest().build();
+        }else{
+            return ResponseEntity.ok().body(pay);
+        }
     }
 
     @PostMapping("pay/p")
-    public void makePayment(@RequestBody pp pp){
-        paymentService.makePaymentWPP(pp);
+    public ResponseEntity makePayment(@RequestBody ppDTO pp){
+        PaymentDTO pay =paymentService.makePaymentWPP(pp);
+        if(pay==null){
+            return ResponseEntity.badRequest().build();
+        }else{
+            return ResponseEntity.ok().body(pay);
+        }
+    }
+    @PutMapping("/statUP")
+    public ResponseEntity updateShipStat(@RequestBody statDTO stat ){
+        payment pay = paymentService.updateStat(stat);
+        if(pay==null){
+            return ResponseEntity.notFound().build();
+        }else {
+            return ResponseEntity.ok().body(pay);
+        }
     }
 }
 

@@ -14,7 +14,8 @@ public interface BucketDAO extends JpaRepository<Bucket, BucketIdentifier> {
     Integer getmaxBucketId(String email);
 
     @Query(value= "SELECT *" +
-            "From bucket LEFT JOIN payment ON (bucket.user_email = payment.user_email AND payment.bucket_id=bucket_id)" +
+            "From bucket LEFT JOIN payment ON (bucket.user_email = payment.user_email " +
+            "AND payment.bucket_id=bucket.id)" +
             "WHERE payment.bucket_id IS NULL AND bucket.user_email=?1", nativeQuery = true)
     Optional<Bucket> findNotPaidbucket(String email);
 
@@ -27,4 +28,5 @@ public interface BucketDAO extends JpaRepository<Bucket, BucketIdentifier> {
             "FROM payment\n" +
             "ORDER BY payment_date desc,payment_time desc ",nativeQuery =true)
     List<Bucket> getPaidBuckets();
+
 }

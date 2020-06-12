@@ -7,16 +7,18 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.Objects;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @Embeddable
-public class AddressIdentifier implements Serializable {
+public class ItemIdentifier implements Serializable {
 
     private String user_email;
-    private int id;
-
+    private int bucket_id;
+    private String product_author;
+    private String product_name;
+    private String product_printer;
+    private int product_volume;
 }

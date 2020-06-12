@@ -1,33 +1,23 @@
-package io.agileintelligence.projectboard.Entity;
+package io.agileintelligence.projectboard.RequestBody;
 
-import io.agileintelligence.projectboard.Hash;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Date;
-import java.util.Arrays;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-@Table(name = "user")
-public class User {
+public class UserDTO{
 
-    @Id
-    @Column(name = "email", nullable = false)
     private String email;
-    private String password;
     private String name;
     private boolean gender;
     private Date dob;
     private int phone_first3;
     private int phone_rest;
     private String profil_pic;
-    @Column(name = "is_admin")
     private boolean admin;
-
-
 }

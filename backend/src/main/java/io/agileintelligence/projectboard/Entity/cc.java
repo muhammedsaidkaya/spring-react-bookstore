@@ -13,13 +13,13 @@ public class cc {
     @EmbeddedId
     paymentIden paymentIden;
 
-    private int card_num;
+    private String card_num;
     private int cvc;
 
     public cc() {
     }
 
-    public cc(io.agileintelligence.projectboard.EmbeddedPrimaryKey.paymentIden paymentIden, int card_num, int cvc) {
+    public cc(io.agileintelligence.projectboard.EmbeddedPrimaryKey.paymentIden paymentIden, String card_num, int cvc) {
         this.paymentIden = paymentIden;
         this.card_num = card_num;
         this.cvc = cvc;
@@ -33,11 +33,11 @@ public class cc {
         this.paymentIden = paymentIden;
     }
 
-    public int getCard_num() {
+    public String getCard_num() {
         return card_num;
     }
 
-    public void setCard_num(int card_num) {
+    public void setCard_num(String card_num) {
         this.card_num = card_num;
     }
 

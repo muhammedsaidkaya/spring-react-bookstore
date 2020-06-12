@@ -1,15 +1,21 @@
 package io.agileintelligence.projectboard.Service;
 
+import io.agileintelligence.projectboard.EmbeddedPrimaryKey.AddressIdentifier;
 import io.agileintelligence.projectboard.Entity.Address;
+import io.agileintelligence.projectboard.RequestBody.AddressDTO;
 
 import java.util.List;
 
 public interface AddressService {
     List<Address> getAddresses(String email);
 
-    void addAddress(Address address);
 
-    void deleteAddress(String email, String address);
+    Address addAddress(AddressDTO addressDTO);
 
-    List<Address> getAllAddresses();
+    Boolean deleteAddress(AddressIdentifier addressIdentifier);
+
+    Address updateAddress(Address address);
+
+
+    //void updateAddress(Address address);
 }

@@ -4,6 +4,10 @@ import io.agileintelligence.projectboard.EmbeddedPrimaryKey.paymentIden;
 import io.agileintelligence.projectboard.Entity.cc;
 import io.agileintelligence.projectboard.Entity.payment;
 import io.agileintelligence.projectboard.Entity.pp;
+import io.agileintelligence.projectboard.RequestBody.PaymentDTO;
+import io.agileintelligence.projectboard.RequestBody.ccDTO;
+import io.agileintelligence.projectboard.RequestBody.ppDTO;
+import io.agileintelligence.projectboard.RequestBody.statDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +22,7 @@ public interface paymentService {
 
     int getPaymentType(paymentIden paymentIden);
 
+    payment updateStat(statDTO new_stat);
     //void makePayment(String e_mail, int bucketId, String paymeth, List<Integer> info);
 
     //void makePayment(paymentIden paymentIden, String paymeth, List<Integer> info);
@@ -28,9 +33,9 @@ public interface paymentService {
 
     void makePayment(payment payment);
 
-    void makePaymentWCC(cc cc);
+    PaymentDTO makePaymentWCC(ccDTO cc);
 
-    void makePaymentWPP(pp pp);
+    PaymentDTO makePaymentWPP(ppDTO pp);
 
     //void makePayment(pp pp);
 

@@ -16,7 +16,7 @@ public interface ccService {
     Optional<cc> getCCInfo(paymentIden ccIden);
 
     // Add new record to cc table with separate composite primary keys
-    cc payWithCreditCard(String e_mail, int bucketId, int cardNum, int cvc);
+    cc payWithCreditCard(String e_mail, int bucketId, String cardNum, int cvc);
 
     // Add new record to cc table with merged composite primary keys
     void payWithCreditCard(cc cc);

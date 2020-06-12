@@ -21,5 +21,8 @@ public interface ProductDAO extends JpaRepository<Product, ProductIDentifier> {
 
     @Query(value = "select product from Product product WHERE product.productIDentifier.name LIKE %?1% OR product.productIDentifier.printer LIKE %?1% OR product.productIDentifier.writter LIKE %?1%")
     List<Product> searchProduct(String x);
+
+    @Query(value = "select product FROM Product product WHERE product.cat_id = ?1")
+    List<Product> findByCategoryId(int id);
 }
 

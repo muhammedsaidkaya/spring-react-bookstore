@@ -7,16 +7,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @Embeddable
-public class AddressIdentifier implements Serializable {
+public class LogIdentifier implements Serializable {
 
     private String user_email;
-    private int id;
-
+    private Date date;
 }

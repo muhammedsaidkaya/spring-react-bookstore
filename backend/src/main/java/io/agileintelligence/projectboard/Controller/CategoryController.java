@@ -21,14 +21,14 @@ public class CategoryController {
     }
 
     /* http://localhost:8080/categories */
-    @PostMapping
-    public void addProduct(@RequestBody Category category) {
+    @PostMapping("/add")
+    public void addCategory(@RequestBody Category category) {
         categoryService.addCategory(category);
     }
 
     /* http://localhost:8080/categories/id=2 */
     @DeleteMapping(path = "/id={id}")
-    public void deleteProduct(@PathVariable int id) {
+    public void deleteCategory(@PathVariable int id) {
         categoryService.deleteCategory(id);
     }
 
