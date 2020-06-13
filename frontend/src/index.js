@@ -30,7 +30,14 @@ import Index from "views/Index.js";
 import NucleoIcons from "views/NucleoIcons.js";
 import LandingPage from "views/examples/LandingPage.js";
 import ProfilePage from "views/examples/ProfilePage.js";
+import UserPage from "views/examples/UserPage.js";
 import RegisterPage from "views/examples/RegisterPage.js";
+import RegisteringPage from "views/examples/RegisteringPage.js";
+import CategoriesPage from "views/examples/CategoriesPage.js";
+import BucketPage from "views/examples/BucketPage.js";
+import LogsPage from "views/examples/LogsPage.js";
+import UserProfilePage from "views/examples/UserProfilePage.js";
+import OrdersPage from "views/examples/OrdersPage.js";
 import UserInfo from "./components/Api/userInfo";
 import ProductPage from "./views/examples/ProductPage";
 import IndexUser from "./views/IndexUser";
@@ -66,9 +73,80 @@ ReactDOM.render(
             }}
         />
         <Route
-        path="/register"
-        render={props => <RegisterPage {...props} />}
+            path="/bucket"
+            render={props =>{
+                if (UserInfo.getBucketCount()<1) {
+                    return <Redirect to={{pathname: '/index', state: {from: props.location}}}/>;
+                }
+                else{
+                    return <BucketPage {...props} />;
+                }
+            }}
         />
+        <Route
+            path="/orders"
+            render={props =>{
+                if (!UserInfo.isAdmin()) {
+                    return <Redirect to={{pathname: '/index', state: {from: props.location}}}/>;
+                }
+                else{
+                    return <OrdersPage {...props} />;
+                }
+            }}
+        />
+        <Route
+            path="/categories"
+            render={props =>{
+                if (!UserInfo.isAdmin()) {
+                    return <Redirect to={{pathname: '/index', state: {from: props.location}}}/>;
+                }
+                else{
+                    return <CategoriesPage {...props} />;
+                }
+            }}
+        />
+        <Route
+            path="/statistic"
+            render={props =>{
+                if (!UserInfo.isAdmin()) {
+                    return <Redirect to={{pathname: '/index', state: {from: props.location}}}/>;
+                }
+                else{
+                    return <LogsPage {...props} />;
+                }
+            }}
+        />
+        <Route
+            path="/users"
+            render={props =>{
+                if (!UserInfo.isAdmin()) {
+                    return <Redirect to={{pathname: '/index', state: {from: props.location}}}/>;
+                }
+                else{
+                    return <UserPage {...props} />;
+                }
+            }}
+        />
+        <Route
+        path="/register"
+        render={props => {
+            if (!UserInfo.isCheckLogin()) {
+                return <RegisteringPage {...props} />;
+            }
+            else{
+                return <Redirect to={{pathname: '/index', state: {from: props.location}}}/>;
+            }
+        }} />
+        <Route
+            path="/profile"
+            render={props => {
+                if (UserInfo.isCheckLogin()) {
+                    return <UserProfilePage {...props} />;
+                }
+                else{
+                    return <Redirect to={{pathname: '/index', state: {from: props.location}}}/>;
+                }
+            }} />
         <Route
             path="/login"
             render={props =>{

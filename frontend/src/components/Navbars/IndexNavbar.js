@@ -31,6 +31,7 @@ import {
   Container
 } from "reactstrap";
 import UserInfo from "../Api/userInfo";
+import SectionBucket from "../../views/index-sections/SectionBucket";
 
 function IndexNavbar() {
   const [navbarColor, setNavbarColor] = React.useState("navbar-transparent");
@@ -91,13 +92,59 @@ function IndexNavbar() {
         >
           <Nav navbar>
             {
-              UserInfo.isAdmin() == true && (
+              UserInfo.isAdmin() == true ?  (
                   <>
+                    <NavItem>
+                      <NavLink
+                          href="orders"
+                      >
+                        <i className="nc-icon nc-cart-simple" /> Orders
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                          href="categories"
+                      >
+                        <i className="nc-icon nc-tile-56" /> Categories
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                          href="statistic"
+                      >
+                        <i className="nc-icon nc-chart-bar-32" /> Statistics
+                      </NavLink>
+                    </NavItem>
+                    <NavItem>
+                      <NavLink
+                          href="users"
+                      >
+                        <i className="nc-icon nc-single-02" /> Users
+                      </NavLink>
+                    </NavItem>
                     <NavItem>
                       <NavLink
                           href="products"
                       >
                         <i className="nc-icon nc-book-bookmark" /> Products
+                      </NavLink>
+                    </NavItem>
+                  </>
+              ) : (
+                  <>
+                    <NavItem>
+                      <NavLink
+                          href="index"
+                      >
+                        <i className="nc-icon nc-shop" /> Home
+                      </NavLink>
+                    </NavItem>
+                    <SectionBucket/>
+                    <NavItem>
+                      <NavLink
+                          href="profile"
+                      >
+                        <i className="nc-icon nc-settings-gear-65" /> Profile
                       </NavLink>
                     </NavItem>
                   </>

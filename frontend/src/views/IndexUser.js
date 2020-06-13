@@ -22,9 +22,12 @@ import React from "react";
 
 // core components
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
-import IndexHeader from "components/Headers/IndexHeader.js";
+import LandingPageHeader from "components/Headers/LandingPageHeader.js";
+import SectionCarousel from "views/index-sections/SectionCarousel.js";
+import SectionProduct from "views/index-sections/SectionProduct.js";
 import DemoFooter from "components/Footers/DemoFooter.js";
 import UserInfo from "../components/Api/userInfo";
+import Row from "antd/es/descriptions/Row";
 
 function IndexUser() {
   document.documentElement.classList.remove("nav-open");
@@ -37,10 +40,7 @@ function IndexUser() {
   return (
     <>
       <IndexNavbar />
-      <IndexHeader />
-      <div className="main">
-        <DemoFooter />
-      </div>
+      <SectionProduct />
     </>
   );
 }

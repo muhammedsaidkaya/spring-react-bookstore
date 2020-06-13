@@ -68,7 +68,6 @@ public class paymentServiceImpl implements paymentService{
 
     @Override
     public PaymentDTO makePaymentWCC(ccDTO cc){
-        ccDAO.save(cc.getCc());
         payment p = paymentDAO.findById(cc.getCc().getPaymentIden()).orElse(null);
         if(p!=null)
             return null;
@@ -90,6 +89,7 @@ public class paymentServiceImpl implements paymentService{
             }
         }
         paymentDAO.save(pp);
+        ccDAO.save(cc.getCc());
         return new PaymentDTO(cc.getItems(),cc.getAddress().getAddress(),pp.getPayment_date(),pp.getPayment_time(),(float) pp.getTotal_price(),pp.getStat(),pp.getStat_time(),"Credit Card");
     }
 

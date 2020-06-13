@@ -2,6 +2,7 @@
 import React from "react";
 import moment from "moment";
 import { message } from 'antd';
+import Api from "./api";
 
 const UserInfo = {
     json2array: function (json) {
@@ -17,6 +18,7 @@ const UserInfo = {
     generalAlert: function (data, type, title, clickPageChange = null, closeTime = 30000) {
         let modal = false;
         let messageStr = '';
+        console.log(data);
         data = data.response ? data.response.data : data;
         data = data.data ? data.data : data;
         if (data.Errors) {
@@ -40,7 +42,7 @@ const UserInfo = {
         if (type == 'success') {
             message.success(messageStr);
         } else if (type == 'error') {
-            if(data.status == 406){
+            if(data.status == 422){
                 message.error("There is a product with that identical fields.");
             }else{
                 message.error("There is an unexpected error occur");
@@ -107,7 +109,38 @@ const UserInfo = {
         return false
     },
     isAdmin: function () {
-        return !!UserInfo.info('is_admin');
+        return UserInfo.info('admin');
+    },
+    getToken: function () {
+        return localStorage.getItem('jwt');
+    },
+    getEmail: function () {
+        return UserInfo.info('email');
+    },
+    getBucketCount: function () {
+        let count = 2;
+        Api.getBucketCount().then(function (response) {
+            count = response.data;
+        }).catch(error => {
+            console.log(error);
+        });
+        return count;
+    },
+    getUserInfo: function () {
+        let userInfo = localStorage.getItem('userInfo');
+        if (userInfo) {
+            userInfo = JSON.parse(userInfo);
+            return userInfo;
+        }
+    },
+    setUserInfo: function (data) {
+        console.log(data.gender + "asdsa");
+        this.set("name",data.name);
+        this.set("email",data.email);
+        this.set("dob",data.dob);
+        this.set("phone_first3",data.phone_first3);
+        this.set("phone_rest",data.phone_rest);
+        this.set("pic",data.pic);
     }
 };
 export default UserInfo;

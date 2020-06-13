@@ -66,6 +66,7 @@ class ProductPage extends Component{
       console.log(error);
     });
   }
+
   render() {
     return (
         <>

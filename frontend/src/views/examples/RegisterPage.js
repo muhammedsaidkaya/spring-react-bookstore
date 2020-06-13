@@ -48,13 +48,21 @@ class RegisterPage extends Component {
     }else{
       if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(self.state.email)) {
         Api.login(self.state.email, self.state.password).then(function (response) {
-          if (response.data != null) {
+          if (response.data != "") {
             localStorage.setItem('userInfo', JSON.stringify(response.data));
-            self.setState({login: true});
-            if (UserInfo.isAdmin())
-              UserInfo.pageChange(self, 'index');
-            else
-              UserInfo.pageChange(self, 'landing-page')
+            Api.sendLog(self.state.email).then(function (response) {
+              if (response.data != null) {
+                self.setState({login: true});
+                if (UserInfo.isAdmin())
+                  UserInfo.pageChange(self, 'index');
+                else
+                  UserInfo.pageChange(self, 'landing-page')
+              } else {
+                message.error("There is no user with those info");
+              }
+            }).catch(error => {
+              console.log(error);
+            });
           } else {
             message.error("There is no user with those info");
           }
@@ -65,14 +73,29 @@ class RegisterPage extends Component {
         message.error("You have entered an invalid email address");
       }
     }
-  }
-  ;
+  };
   changeEmail(e){
     self.setState({email: e});
   };
   changePassword(e){
     self.setState({password: e});
   };
+  setPassword(e){
+    e.preventDefault();
+    if((this.state.email != null) && (this.state.email != ""))
+    {
+      let data = {
+        "email": self.state.email
+      };
+      Api.setPasswordToDefault(data).then(function (response) {
+        message.success("Password is set on to \"Dewamke\"");
+      }).catch(error => {
+        console.log(error);
+      });
+    }else{
+      message.error("You have to enter your email address.");
+    }
+  }
   render() {
   return (
       <>
@@ -102,7 +125,7 @@ class RegisterPage extends Component {
                     <Button
                         className="btn-link"
                         color="danger"
-                        type={"submit"}
+                        onClick={(e)=>self.setPassword(e)}
                     >
                       Forgot password?
                     </Button>

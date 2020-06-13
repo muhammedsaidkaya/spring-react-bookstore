@@ -2,11 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="072886ef-de79-40a3-90a3-40553537df52" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/io/agileintelligence/projectboard/Controller/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/io/agileintelligence/projectboard/Controller/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/src/main/java/io/agileintelligence/projectboard/Entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/src/main/java/io/agileintelligence/projectboard/Entity/Product.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/api.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Api/userInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/userInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Headers/LandingPageHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Headers/LandingPageHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Headers/ProfilePageHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Headers/ProfilePageHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Navbars/IndexNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbars/IndexNavbar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/IndexUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/IndexUser.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/examples/ProductPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/examples/ProductPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/examples/ProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/examples/ProfilePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/examples/RegisterPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/examples/RegisterPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/index-sections/SectionCarousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/index-sections/SectionCarousel.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,9 +22,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ComposerSettings">
-    <execution>
-      <executable />
-    </execution>
+    <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -25,10 +31,10 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -43,6 +49,8 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\EmreHancı\bbm384-project-spring2020-devamke\frontend\src\views\index-sections" />
+      <recent name="C:\Users\EmreHancı\bbm384-project-spring2020-devamke\frontend\src\views\examples" />
       <recent name="E:\PhpStormProjects\PBS\src\views" />
       <recent name="E:\PhpStormProjects\PBS\src\views\examples" />
       <recent name="E:\PhpStormProjects\PBS\src\components\Api" />
@@ -69,19 +77,46 @@
       <workItem from="1587922335615" duration="8365000" />
       <workItem from="1587936994185" duration="1657000" />
       <workItem from="1587938779441" duration="63000" />
+      <workItem from="1587981564615" duration="1912000" />
+      <workItem from="1587994032814" duration="39000" />
+      <workItem from="1588028098767" duration="602000" />
+      <workItem from="1588029813502" duration="75000" />
+      <workItem from="1588030107394" duration="154000" />
+      <workItem from="1590840617351" duration="24604000" />
+      <workItem from="1590915734418" duration="101000" />
+      <workItem from="1590927402916" duration="21102000" />
+      <workItem from="1590995420996" duration="7128000" />
+      <workItem from="1591002636724" duration="76000" />
+      <workItem from="1591032663344" duration="9337000" />
+      <workItem from="1591084955862" duration="195000" />
+      <workItem from="1591210212425" duration="10613000" />
+      <workItem from="1591254548053" duration="688000" />
+      <workItem from="1591293882707" duration="13724000" />
+      <workItem from="1591642769930" duration="73000" />
+      <workItem from="1591692151428" duration="35000" />
+      <workItem from="1591731453390" duration="5099000" />
+      <workItem from="1591769256954" duration="47000" />
+      <workItem from="1591806303604" duration="1625000" />
+      <workItem from="1591809642981" duration="1724000" />
+      <workItem from="1591814050407" duration="7936000" />
+      <workItem from="1591824073488" duration="953000" />
+      <workItem from="1591955018813" duration="15819000" />
+      <workItem from="1592038731560" duration="8762000" />
+      <workItem from="1592060541261" duration="6784000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="620" y="261" key="FileChooserDialogImpl" timestamp="1587814477999">
+    <state x="620" y="261" key="FileChooserDialogImpl" timestamp="1591811249431">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state x="567" y="213" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1587671725382" />
     <state x="620" y="261" key="FileChooserDialogImpl/1680.-25.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1587067000201" />
-    <state x="620" y="261" key="FileChooserDialogImpl/1680.77.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1587814477999" />
+    <state x="620" y="261" key="FileChooserDialogImpl/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1591811249431" />
+    <state x="620" y="261" key="FileChooserDialogImpl/1680.77.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1588029886658" />
     <state width="1637" height="272" key="GridCell.Tab.0.bottom" timestamp="1587064548561">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
@@ -98,5 +133,21 @@
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state width="1637" height="272" key="GridCell.Tab.0.right/1680.-25.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1587064548560" />
+    <state x="298" y="171" width="1223" height="815" key="dock-window-1" timestamp="1590950987353">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="298" y="171" width="1223" height="815" key="dock-window-1/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1590950987353" />
+    <state x="547" y="209" width="585" height="592" key="find.popup" timestamp="1592047870604">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="547" y="209" width="585" height="592" key="find.popup/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1592047870604" />
+    <state x="496" y="233" key="run.anything.popup" timestamp="1591822367442">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="496" y="233" key="run.anything.popup/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1591822367442" />
+    <state x="503" y="217" width="672" height="678" key="search.everywhere.popup" timestamp="1591967794560">
+      <screen x="0" y="0" width="1680" height="1010" />
+    </state>
+    <state x="503" y="217" width="672" height="678" key="search.everywhere.popup/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1591967794560" />
   </component>
 </project>

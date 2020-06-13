@@ -73,4 +73,15 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @Override
+    public Boolean forgetPassword(String email) {
+        Optional<User> user = userDAO.findByEmail(email);
+        if(user.isPresent()) {
+            user.get().setPassword(Hash.sha1("devamke"));
+            userDAO.save(user.get());
+            return true;
+        }
+        return false;
+    }
+
 }

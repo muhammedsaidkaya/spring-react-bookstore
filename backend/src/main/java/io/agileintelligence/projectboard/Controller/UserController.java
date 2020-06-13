@@ -63,6 +63,15 @@ public class UserController {
         return ResponseEntity.unprocessableEntity().build();
     }
 
+    @PostMapping("/forgetPassword")
+    public ResponseEntity forgetPassword(@RequestBody UserDelete userDelete){
+        if(userService.forgetPassword(userDelete.getEmail())){
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.unprocessableEntity().build();
+    }
+
+
     @PostMapping
     public ResponseEntity getUser(@RequestBody String email){
         return ResponseEntity.ok(userService.getUser(email));

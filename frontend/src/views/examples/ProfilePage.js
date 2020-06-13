@@ -26,7 +26,13 @@ import {
   Input,
   Container,
   Row,
-  Col, Table
+  Col,
+  Table,
+  NavItem,
+  NavLink,
+  Nav,
+  TabContent,
+  TabPane,
 } from "reactstrap";
 import { message } from 'antd';
 import ProfilePageHeader from "components/Headers/ProfilePageHeader.js";
@@ -46,6 +52,7 @@ class ProfilePage extends Component{
       products: null,
       product: null,
       page: 0,
+      activeTab: "1",
       form: {
         productIDentifier: {
           name: "",
@@ -60,6 +67,7 @@ class ProfilePage extends Component{
         product_pic: "",
       },
       categories: null,
+      feedbacks: null,
     };
   }
   componentDidMount() {
@@ -80,6 +88,15 @@ class ProfilePage extends Component{
     Api.deleteProduct(self.state.products[i].productIDentifier).then(function (response) {
       message.success("Delete is success");
       self.getProdutcs();
+    }).catch(error => {
+      console.log(error);
+    });
+  }
+  sendFeedbackDelete(e,i){
+    e.preventDefault();
+    Api.deleteFeedback(self.state.feedbacks[i].itemIdentifier).then(function (response) {
+      message.success("Delete is success");
+      self.toggle("2");
     }).catch(error => {
       console.log(error);
     });
@@ -105,6 +122,8 @@ class ProfilePage extends Component{
   toList(){
     self.setState({
       product: null,
+      feedbacks: null,
+      activeTab: "1",
       page: 0
     });
   }
@@ -130,29 +149,37 @@ class ProfilePage extends Component{
       message.error("There is at least one requiered field is empty");
     }
     else{
-      Api.addProducts(this.state.form).then(function (response) {
-        message.success("Adding is success");
-        self.setState({
-          page: 0,
-          form: {
-            productIDentifier: {
-              name: "",
-              printer: "",
-              writter: "",
-              volume: ""
+      if((this.state.form.stock >= 0) && (this.state.form.price >= 0))
+      {
+        Api.addProducts(this.state.form).then(function (response) {
+          message.success("Adding is success");
+          self.setState({
+            page: 0,
+            form: {
+              productIDentifier: {
+                name: "",
+                printer: "",
+                writter: "",
+                volume: ""
+              },
+              stock: 0,
+              price: 0,
+              category_id: 0,
+              brief: "",
+              product_pic: "",
             },
-            stock: 0,
-            price: 0,
-            category_id: 0,
-            brief: "",
-            product_pic: "",
-          },
-          product: null,
+            product: null,
+          });
+          self.getProdutcs();
+        }).catch(error => {
+          UserInfo.generalAlert(error.response);
         });
-        self.getProdutcs();
-      }).catch(error => {
-        UserInfo.generalAlert(error.response);
-      });
+      }
+      else
+      {
+        message.error("Stock and Price cannot be less than 0");
+      }
+
     }
   }
   handleSubmitUpdate(e){
@@ -171,29 +198,36 @@ class ProfilePage extends Component{
       message.error("There is at least one requiered field is empty");
     }
     else{
-      Api.updateProducts(this.state.form).then(function (response) {
-        message.success("Update is success");
-        self.setState({
-          page: 0,
-          form: {
-            productIDentifier: {
-              name: "",
-              printer: "",
-              writter: "",
-              volume: ""
+      if((this.state.form.stock >= 0) && (this.state.form.price >= 0))
+      {
+        Api.updateProducts(this.state.form).then(function (response) {
+          message.success("Update is success");
+          self.setState({
+            page: 0,
+            form: {
+              productIDentifier: {
+                name: "",
+                printer: "",
+                writter: "",
+                volume: ""
+              },
+              stock: 0,
+              price: 0,
+              category_id: 0,
+              brief: "",
+              product_pic: "",
             },
-            stock: 0,
-            price: 0,
-            category_id: 0,
-            brief: "",
-            product_pic: "",
-          },
-          product: null,
+            product: null,
+          });
+          self.getProdutcs();
+        }).catch(error => {
+          UserInfo.generalAlert(error);
         });
-        self.getProdutcs();
-      }).catch(error => {
-        UserInfo.generalAlert(error);
-      });
+      }
+      else
+      {
+        message.error("Stock and Price cannot be less than 0");
+      }
     }
   }
   change(type,value){
@@ -350,6 +384,20 @@ class ProfilePage extends Component{
       }
     })
   }
+  toggle(type){
+    self.setState({
+      activeTab: type
+    });
+    if(type == "2"){
+      Api.getFeedback(this.state.product.productIDentifier).then(function (response) {
+        self.setState({
+          feedbacks: response.data
+        });
+      }).catch(error => {
+        console.log(error);
+      });
+    };
+  }
   render(){
     return (
         <>
@@ -488,84 +536,155 @@ class ProfilePage extends Component{
                           </Form>
                       ):(
                           <>
-                            <Form onSubmit={(e) => self.handleSubmitUpdate(e)}>
-                            <Row form>
-                              <Col md={6}>
-                                <FormGroup>
-                                  <Label for="productName">Name</Label>
-                                  <Input disabled type="text" name="name" id="productName" placeholder="Product Name" onChange={e => self.change('name',e.target.value)} value={this.state.form.productIDentifier.name}/>
-                                </FormGroup>
-                              </Col>
-                              <Col md={6}>
-                                <FormGroup>
-                                  <Label for="productPrinter">Printer</Label>
-                                  <Input disabled type="text" name="printer" id="productPrinter" placeholder="Product Printer" onChange={e => self.change('printer',e.target.value)} value={this.state.form.productIDentifier.printer}/>
-                                </FormGroup>
-                              </Col>
-                            </Row>
-                            <FormGroup>
-                              <Label for="productWritter">Writter</Label>
-                              <Input disabled type="text" name="writter" id="productWritter" placeholder="Product Writer" onChange={e => self.change('writter',e.target.value)} value={this.state.form.productIDentifier.writter}/>
-                            </FormGroup>
-                            <FormGroup>
-                              <Label for="productVolume">Volume</Label>
-                              <Input disabled type="text" name="volume" id="productVolume" placeholder="Product Volume" onChange={e => self.change('volume',e.target.value)} value={this.state.form.productIDentifier.volume}/>
-                            </FormGroup>
-                            <FormGroup>
-                              <Label for="productStock">Stock</Label>
-                              <Input type="text" name="stock" id="productStock" placeholder="Product Stock" onChange={e => self.change('stock',e.target.value)} value={this.state.form.stock}/>
-                            </FormGroup>
-                            <FormGroup>
-                              <Label for="productPrice">Price</Label>
-                              <Input type="text" name="price" id="productPrice" placeholder="Product Price" onChange={e => self.change('price',e.target.value)} value={this.state.form.price}/>
-                            </FormGroup>
-                            <FormGroup row>
-                              <Label for="productCategory" sm={2}>Category</Label>
-                              <Col sm={10}>
-                                <Input type="select" name="category" id="productCategory" onChange={e => self.change('category',e.target.value)} value={this.state.form.category_id}>
-                                  {
-                                    self.state.categories != null && (
-                                        this.state.categories.map(function (v, i) {
-                                          return(
-                                              <option value={v.id}>{v.name}</option>
-                                          );
-                                        }))
-                                  }
-                                </Input>
-                              </Col>
-                            </FormGroup>
-                            <Row form>
-                              <Col md={6}>
-                                <FormGroup>
-                                  <Label for="productBrief">Brief</Label>
-                                  <Input type="text" name="brief" id="productBrief" placeholder="Product Brief" onChange={e => self.change('brief',e.target.value)} value={this.state.form.brief}/>
-                                </FormGroup>
-                              </Col>
-                              <Col md={6}>
-                                <FormGroup>
-                                  <Label for="productPicture">Product Picture</Label>
-                                    <Input type="text" name="picture" id="productPicture" placeholder="Product Picture" onChange={e => self.change('picture',e.target.value)} value={this.state.form.product_pic} />
-                                </FormGroup>
-                              </Col>
-                            </Row>
-                            <Button>Update Product</Button>
-                          </Form>
-                            <br/>
-                            <h3 style={{textAlign:'center'}}>Product Preview</h3>
-                            <br/>
-                            <Media>
-                              <Media left>
-                                <Media style={{maxHeight:'250px'}} object src={this.state.form.product_pic}/>
-                              </Media>
-                              <Media body style={{marginLeft:'20px'}}>
-                                <Media heading>
-                                  {this.state.form.productIDentifier.name+" | "+this.state.form.productIDentifier.writter+" | "+this.state.form.productIDentifier.printer+" | Volume "+this.state.form.productIDentifier.volume}
-                                </Media>
-                                <h5>Brief: {this.state.form.brief}</h5>
-                                <h5>Stock: {this.state.form.stock}</h5>
-                                <h5>Price: {this.state.form.price}$</h5>
-                              </Media>
-                            </Media>
+                            <div>
+                              <div className="nav-tabs-navigation">
+                                <div className="nav-tabs-wrapper">
+                                  <Nav id="tabs" role="tablist" tabs>
+                                    <NavItem>
+                                      <NavLink
+                                          className={this.state.activeTab === "1" ? "active" : ""}
+                                          onClick={() => {
+                                            this.toggle("1");
+                                          }}
+                                      >
+                                        Product Infos
+                                      </NavLink>
+                                    </NavItem>
+                                    <NavItem>
+                                      <NavLink
+                                          className={this.state.activeTab === "2" ? "active" : ""}
+                                          onClick={() => {
+                                            this.toggle("2");
+                                          }}
+                                      >
+                                        Product Feedback Infos
+                                      </NavLink>
+                                    </NavItem>
+                                  </Nav>
+                                </div>
+                              </div>
+                              <TabContent activeTab={this.state.activeTab}>
+                                <TabPane tabId="1">
+                                  <Form onSubmit={(e) => self.handleSubmitUpdate(e)}>
+                                    <Row form>
+                                      <Col md={6}>
+                                        <FormGroup>
+                                          <Label for="productName">Name</Label>
+                                          <Input disabled type="text" name="name" id="productName" placeholder="Product Name" onChange={e => self.change('name',e.target.value)} value={this.state.form.productIDentifier.name}/>
+                                        </FormGroup>
+                                      </Col>
+                                      <Col md={6}>
+                                        <FormGroup>
+                                          <Label for="productPrinter">Printer</Label>
+                                          <Input disabled type="text" name="printer" id="productPrinter" placeholder="Product Printer" onChange={e => self.change('printer',e.target.value)} value={this.state.form.productIDentifier.printer}/>
+                                        </FormGroup>
+                                      </Col>
+                                    </Row>
+                                    <FormGroup>
+                                      <Label for="productWritter">Writter</Label>
+                                      <Input disabled type="text" name="writter" id="productWritter" placeholder="Product Writer" onChange={e => self.change('writter',e.target.value)} value={this.state.form.productIDentifier.writter}/>
+                                    </FormGroup>
+                                    <FormGroup>
+                                      <Label for="productVolume">Volume</Label>
+                                      <Input disabled type="text" name="volume" id="productVolume" placeholder="Product Volume" onChange={e => self.change('volume',e.target.value)} value={this.state.form.productIDentifier.volume}/>
+                                    </FormGroup>
+                                    <FormGroup>
+                                      <Label for="productStock">Stock</Label>
+                                      <Input type="text" name="stock" id="productStock" placeholder="Product Stock" onChange={e => self.change('stock',e.target.value)} value={this.state.form.stock}/>
+                                    </FormGroup>
+                                    <FormGroup>
+                                      <Label for="productPrice">Price</Label>
+                                      <Input type="text" name="price" id="productPrice" placeholder="Product Price" onChange={e => self.change('price',e.target.value)} value={this.state.form.price}/>
+                                    </FormGroup>
+                                    <FormGroup row>
+                                      <Label for="productCategory" sm={2}>Category</Label>
+                                      <Col sm={10}>
+                                        <Input type="select" name="category" id="productCategory" onChange={e => self.change('category',e.target.value)} value={this.state.form.category_id}>
+                                          {
+                                            self.state.categories != null && (
+                                                this.state.categories.map(function (v, i) {
+                                                  return(
+                                                      <option value={v.id}>{v.name}</option>
+                                                  );
+                                                }))
+                                          }
+                                        </Input>
+                                      </Col>
+                                    </FormGroup>
+                                    <Row form>
+                                      <Col md={6}>
+                                        <FormGroup>
+                                          <Label for="productBrief">Brief</Label>
+                                          <Input type="text" name="brief" id="productBrief" placeholder="Product Brief" onChange={e => self.change('brief',e.target.value)} value={this.state.form.brief}/>
+                                        </FormGroup>
+                                      </Col>
+                                      <Col md={6}>
+                                        <FormGroup>
+                                          <Label for="productPicture">Product Picture</Label>
+                                          <Input type="text" name="picture" id="productPicture" placeholder="Product Picture" onChange={e => self.change('picture',e.target.value)} value={this.state.form.product_pic} />
+                                        </FormGroup>
+                                      </Col>
+                                    </Row>
+                                    <Button>Update Product</Button>
+                                  </Form>
+                                  <br/>
+                                  <h3 style={{textAlign:'center'}}>Product Preview</h3>
+                                  <br/>
+                                  <Media>
+                                    <Media left>
+                                      <Media className={'img-thumbnail img-responsive'} style={{maxHeight:'250px'}} object src={this.state.form.product_pic}/>
+                                    </Media>
+                                    <Media body style={{marginLeft:'20px'}}>
+                                      <Media heading>
+                                        {this.state.form.productIDentifier.name+" | "+this.state.form.productIDentifier.writter+" | "+this.state.form.productIDentifier.printer+" | Volume "+this.state.form.productIDentifier.volume}
+                                      </Media>
+                                      <h5>Brief: {this.state.form.brief}</h5>
+                                      <h5>Stock: {this.state.form.stock}</h5>
+                                      <h5>Price: {this.state.form.price}$</h5>
+                                    </Media>
+                                  </Media>
+                                </TabPane>
+                                <TabPane tabId="2">
+                                  <Table striped>
+                                    <thead>
+                                    <tr>
+                                      <th>#</th>
+                                      <th>Delete</th>
+                                      <th>Comment Owner</th>
+                                      <th>Comment</th>
+                                      <th>Rate</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {
+                                      self.state.feedbacks != null && (
+                                          this.state.feedbacks.map(function (v, i) {
+                                            return (
+                                                <tr>
+                                                  <th scope="row">{i}</th>
+                                                  <th scope="row">
+                                                    <Popconfirm
+                                                        title="Are you sure delete this products?"
+                                                        onConfirm={(e) =>self.sendFeedbackDelete(e,i)}
+                                                        okText="Yes"
+                                                        cancelText="No"
+                                                    >
+                                                      <a href={''}><i className={'fa fa-trash-o'}/></a>
+                                                    </Popconfirm>
+                                                  </th>
+                                                  <td>{v.itemIdentifier.user_email}</td>
+                                                  <td>{v.explanation}</td>
+                                                  <td>{v.rate}</td>
+                                                </tr>
+                                            );
+                                          })
+                                      )
+                                    }
+                                    </tbody>
+                                  </Table>
+                                </TabPane>
+                              </TabContent>
+                            </div>
                           </>
                       )
                   )
@@ -577,7 +696,6 @@ class ProfilePage extends Component{
         </>
     );
   };
-
 }
 
 export default ProfilePage;

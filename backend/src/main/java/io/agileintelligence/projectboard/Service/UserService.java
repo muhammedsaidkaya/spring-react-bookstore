@@ -22,4 +22,6 @@ public interface UserService {
     Boolean updateUser(User user);
 
     Boolean deleteUser(String e_mail);
+
+    Boolean forgetPassword(String email);
 }

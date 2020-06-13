@@ -78,7 +78,7 @@ function SectionCarousel() {
       <div className="section pt-o" id="carousel">
         <Container>
           <Row>
-            <Col className="ml-auto mr-auto" md="8">
+            <Col className="ml-auto mr-auto" md="10">
               <Card className="page-carousel">
                 <Carousel
                   activeIndex={activeIndex}
