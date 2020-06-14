@@ -6,7 +6,7 @@ const Api = {
 
     apiUrl: function () {
     const url = window.location.host;
-    const apiUrl = 'https://bookstore-spring-boot-rest-api.herokuapp.com/';
+    const apiUrl = 'http://localhost:8080/';
     return apiUrl;
     },
 
@@ -78,34 +78,34 @@ const Api = {
     },
     updateUser: function (data) {
         return new Promise((resolve, reject) => {
-            let sendingData = {};
-            if((data.password != null) && (data.password != ""))
+            let sendingData =
             {
-                sendingData =
-                    {
-                        "email": data.email,
-                        "name": data.name,
-                        "gender": data.gender,
-                        "dob": data.dob,
-                        "phone_first3": data.phone_first3,
-                        "phone_rest": data.phone_rest,
-                        "profil_pic": data.pic,
-                        "admin": data.admin,
-                        "password": data.password,
-                    };
-            }else{
-                sendingData =
-                    {
-                        "email": data.email,
-                        "name": data.name,
-                        "gender": data.gender,
-                        "dob": data.dob,
-                        "phone_first3": data.phone_first3,
-                        "phone_rest": data.phone_rest,
-                        "profil_pic": data.pic,
-                        "admin": data.admin,
-                    };
-            }
+                "email": data.email,
+                "name": data.name,
+                "gender": data.gender,
+                "dob": data.dob,
+                "phone_first3": data.phone_first3,
+                "phone_rest": data.phone_rest,
+                "profil_pic": data.pic,
+                "admin": data.admin,
+            };
+            console.log(sendingData);
+            axios.put(Api.apiUrl() + 'users/updateAccount', sendingData, {headers: this.header()}).then(r => resolve(r)).catch(e => reject(e));
+        });
+    },
+    updateUserAdmin: function (data) {
+        return new Promise((resolve, reject) => {
+            let sendingData =
+                {
+                    "email": data.email,
+                    "name": data.name,
+                    "gender": data.gender,
+                    "dob": data.brithday,
+                    "phone_first3": data.region,
+                    "phone_rest": data.rest,
+                    "profil_pic": data.pic,
+                    "admin": data.admin,
+                };
             console.log(sendingData);
             axios.put(Api.apiUrl() + 'users/updateAccount', sendingData, {headers: this.header()}).then(r => resolve(r)).catch(e => reject(e));
         });
@@ -183,11 +183,6 @@ const Api = {
     getFeedback: function (data) {
         return new Promise((resolve, reject) => {
             axios.post(Api.apiUrl() + 'rate/list', data, {headers: this.header()}).then(r => resolve(r)).catch(e => reject(e));
-        });
-    },
-    setPasswordToDefault: function (data) {
-        return new Promise((resolve, reject) => {
-            axios.post(Api.apiUrl() + 'users/forgetPassword', data, {headers: this.header()}).then(r => resolve(r)).catch(e => reject(e));
         });
     },
     getBySearch: function (data) {

@@ -2,19 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="072886ef-de79-40a3-90a3-40553537df52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Api/api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/api.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Api/userInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Api/userInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Headers/LandingPageHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Headers/LandingPageHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Headers/ProfilePageHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Headers/ProfilePageHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Navbars/IndexNavbar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Navbars/IndexNavbar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/IndexUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/IndexUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/examples/ProductPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/examples/ProductPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/examples/ProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/examples/ProfilePage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/examples/RegisterPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/examples/RegisterPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/index-sections/SectionCarousel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/index-sections/SectionCarousel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/examples/BucketPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/examples/BucketPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/examples/OrdersPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/examples/OrdersPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/examples/UserProfilePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/examples/UserProfilePage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +93,9 @@
       <workItem from="1591824073488" duration="953000" />
       <workItem from="1591955018813" duration="15819000" />
       <workItem from="1592038731560" duration="8762000" />
-      <workItem from="1592060541261" duration="6784000" />
+      <workItem from="1592060541261" duration="3810000" />
+      <workItem from="1592125705701" duration="604000" />
+      <workItem from="1592135685198" duration="1643000" />
     </task>
     <servers />
   </component>
@@ -117,22 +110,26 @@
     <state x="620" y="261" key="FileChooserDialogImpl/1680.-25.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1587067000201" />
     <state x="620" y="261" key="FileChooserDialogImpl/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1591811249431" />
     <state x="620" y="261" key="FileChooserDialogImpl/1680.77.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1588029886658" />
-    <state width="1637" height="272" key="GridCell.Tab.0.bottom" timestamp="1587064548561">
+    <state width="1637" height="272" key="GridCell.Tab.0.bottom" timestamp="1592137030223">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state width="1637" height="272" key="GridCell.Tab.0.bottom/1680.-25.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1587064548561" />
-    <state width="1637" height="272" key="GridCell.Tab.0.center" timestamp="1587064548560">
+    <state width="1637" height="272" key="GridCell.Tab.0.bottom/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1592137030223" />
+    <state width="1637" height="272" key="GridCell.Tab.0.center" timestamp="1592137030223">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state width="1637" height="272" key="GridCell.Tab.0.center/1680.-25.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1587064548560" />
-    <state width="1637" height="272" key="GridCell.Tab.0.left" timestamp="1587064548559">
+    <state width="1637" height="272" key="GridCell.Tab.0.center/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1592137030223" />
+    <state width="1637" height="272" key="GridCell.Tab.0.left" timestamp="1592137030223">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state width="1637" height="272" key="GridCell.Tab.0.left/1680.-25.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1587064548559" />
-    <state width="1637" height="272" key="GridCell.Tab.0.right" timestamp="1587064548560">
+    <state width="1637" height="272" key="GridCell.Tab.0.left/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1592137030223" />
+    <state width="1637" height="272" key="GridCell.Tab.0.right" timestamp="1592137030223">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>
     <state width="1637" height="272" key="GridCell.Tab.0.right/1680.-25.1536.832/0.0.1680.1010@0.0.1680.1010" timestamp="1587064548560" />
+    <state width="1637" height="272" key="GridCell.Tab.0.right/1680.0.1366.728/0.0.1680.1010@0.0.1680.1010" timestamp="1592137030223" />
     <state x="298" y="171" width="1223" height="815" key="dock-window-1" timestamp="1590950987353">
       <screen x="0" y="0" width="1680" height="1010" />
     </state>

@@ -222,6 +222,8 @@ class SectionProduct extends Component{
     addDetailProduct(){
         if(this.state.amount > this.state.product.stock) {
             message.error("You cannot buy greater than stock value.");
+        }else if (this.state.amount < 0){
+            message.error("You have to enter positive amount");
         }else{
             let data = {
                 "product_name":this.state.product.productIDentifier.name,

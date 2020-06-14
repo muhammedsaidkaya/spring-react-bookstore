@@ -88,7 +88,6 @@ class UserProfilePage extends Component{
         phone_rest:response.data.phone_rest.toString(),
         pic:response.data.profil_pic,
         admin:response.data.admin,
-        password:null,
       });
     }).catch(error => {
       UserInfo.generalAlert(error);
@@ -135,10 +134,6 @@ class UserProfilePage extends Component{
       self.setState({
         rate: value,
       });
-    }else if(type === "password"){
-      self.setState({
-        password: value,
-      });
     }
   };
   handleSubmitUpdate(e){
@@ -147,14 +142,13 @@ class UserProfilePage extends Component{
     if(
         (this.state.name == "") ||
         (this.state.email == "") ||
-        (this.state.gender == "") ||
         (this.state.dob == "") ||
         (this.state.phone_first3 == "") ||
         (this.state.phone_rest == "") ||
         (this.state.pic == "")
     )
     {
-      message.error("There is at least one requiered field is empty");
+      message.error("There is at least one requiered field is empty" + this.state.gender);
     }
     else{
       if((this.state.phone_first3.length == 3) && (this.state.phone_first3 > 0))
@@ -199,8 +193,10 @@ class UserProfilePage extends Component{
   toggleAddress(type){
     self.setState({
       activeAddress: type,
+    }, () => {
+      self.getAnAddress(type);
+      self.render();
     });
-    self.getAnAddress(type);
   }
   toggleOrders(type){
     self.setState({
@@ -293,11 +289,10 @@ class UserProfilePage extends Component{
           self.setState({
             anOrder: null,
           });
-          message.success("Order has been canceled.");
+          message.success("You have been write a comment on order.");
         }).catch(error => {
           UserInfo.generalAlert(error);
         });
-        message.success("You have been write a comment on order.");
       }else{
        message.error("You have to chosee rate.");
       }
@@ -415,16 +410,6 @@ class UserProfilePage extends Component{
                           </Col>
                         </Row>
                         <Row form>
-                          <Col md={3}/>
-                          <Col md={6}>
-                            <FormGroup>
-                              <Label for="userPhoneRest">New Password (If you dont want to update leave blank)</Label>
-                              <Input type="password" name="rest" id="userPhoneRest" placeholder="Password" onChange={e => self.change('password',e.target.value)}/>
-                            </FormGroup>
-                          </Col>
-                          <Col md={3}/>
-                        </Row>
-                        <Row form>
                           <Col md={4}>
                             <FormGroup>
                               <Button style={{marginTop: "30px"}}>Update Account</Button>
@@ -505,16 +490,11 @@ class UserProfilePage extends Component{
                             <Col md={6}>
                               <FormGroup>
                                 <Label for="userAddress">Address</Label>
-                                <Input type="text" name="name" id="userAddress" placeholder="Address" onChange={e => self.change('address',e.target.value)} defaultValue={this.state.anAddress}/>
+                                <Input type="text" name="name" id="userAddress" placeholder="Address" onChange={e => self.change('address',e.target.value)} value={this.state.anAddress}/>
                               </FormGroup>
                             </Col>
                             <Col md={6}>
                               <Row>
-                                <Col md={6} style={{textAlign: "end"}}>
-                                  <FormGroup>
-                                    <Button style={{marginTop: "30px"}} onClick={()=>self.deleteAddress(self.state.anAddressId)}>Delete Address</Button>
-                                  </FormGroup>
-                                </Col>
                                 <Col md={6}>
                                   <FormGroup>
                                     <Button style={{marginTop: "30px"}}>Update Address</Button>
@@ -619,34 +599,38 @@ class UserProfilePage extends Component{
                                               </Col>
                                               <Col md={3}/>
                                             </Row>
-                                            <Row>
-                                              <Col md={3}/>
-                                              <Col md={6}>
-                                                <Form>
-                                                  <FormGroup>
-                                                    <Label for="productPrinter">Comment</Label>
-                                                    <Input type="text" name="printer" id="productPrinter" placeholder="Comment" onChange={e => self.change('comment',e.target.value)}/>
-                                                  </FormGroup>
-                                                  <FormGroup>
-                                                    <div className="mb-3">
-                                                      <label htmlFor="existAddress">Chosse Exist Address</label>
-                                                      <Input type="select" name="existAddress" id="userAddress" placeholder="Choose Rate" onChange={e => self.change('rate',e.target.value)}>
-                                                        <option value={0}>Create new address</option>
-                                                        <option value={1}>Bad</option>
-                                                        <option value={2}>Not Bad</option>
-                                                        <option value={3}>Normal</option>
-                                                        <option value={4}>Good</option>
-                                                        <option value={5}>Very Good</option>
-                                                      </Input>
-                                                    </div>
-                                                  </FormGroup>
-                                                  <FormGroup>
-                                                    <Button onClick={()=>self.makeComment(i)}>Make Comment</Button>
-                                                  </FormGroup>
-                                                </Form>
-                                              </Col>
-                                              <Col md={3}/>
-                                            </Row>
+                                            {
+                                              ((self.state.anOrder.payment.stat === "Arrive")) && (
+                                                  <Row>
+                                                    <Col md={3}/>
+                                                    <Col md={6}>
+                                                      <Form>
+                                                        <FormGroup>
+                                                          <Label for="productPrinter">Comment</Label>
+                                                          <Input type="text" name="printer" id="productPrinter" placeholder="Comment" onChange={e => self.change('comment',e.target.value)}/>
+                                                        </FormGroup>
+                                                        <FormGroup>
+                                                          <div className="mb-3">
+                                                            <label htmlFor="existAddress">Chosse Rate</label>
+                                                            <Input type="select" name="existAddress" id="userAddress" placeholder="Choose Rate" onChange={e => self.change('rate',e.target.value)}>
+                                                              <option value={0}>Choose Rate</option>
+                                                              <option value={1}>Bad</option>
+                                                              <option value={2}>Not Bad</option>
+                                                              <option value={3}>Normal</option>
+                                                              <option value={4}>Good</option>
+                                                              <option value={5}>Very Good</option>
+                                                            </Input>
+                                                          </div>
+                                                        </FormGroup>
+                                                        <FormGroup>
+                                                          <Button onClick={()=>self.makeComment(i)}>Make Comment</Button>
+                                                        </FormGroup>
+                                                      </Form>
+                                                    </Col>
+                                                    <Col md={3}/>
+                                                  </Row>
+                                              )
+                                            }
                                           </a>
                                       );
                                     })

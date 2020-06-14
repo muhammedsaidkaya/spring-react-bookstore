@@ -115,6 +115,15 @@ class RegisteringPage extends Component {
                             Register
                           </Button>
                         </Form>
+                        <div className="forgot">
+                          <Button
+                              className="btn-link"
+                              color="danger"
+                              type={"submit"}
+                          >
+                            Forgot password?
+                          </Button>
+                        </div>
                       </Card>
                     </Col>
                   </Row>

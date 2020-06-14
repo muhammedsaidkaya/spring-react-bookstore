@@ -139,17 +139,17 @@ class ProfilePage extends Component{
         (this.state.form.productIDentifier.name == "") ||
         (this.state.form.productIDentifier.printer == "") ||
         (this.state.form.productIDentifier.writter == "") ||
+        (this.state.form.productIDentifier.volume == "") ||
         (this.state.form.stock == 0) ||
         (this.state.form.price == 0) ||
         (this.state.form.brief == "") ||
-        (this.state.form.category_id == 0) ||
         (this.state.form.product_pic == "")
     )
     {
       message.error("There is at least one requiered field is empty");
     }
     else{
-      if((this.state.form.stock >= 0) && (this.state.form.price >= 0))
+      if((this.state.form.stock >= 0) && (this.state.form.price >= 0) && (this.state.form.productIDentifier.volume >= 0))
       {
         Api.addProducts(this.state.form).then(function (response) {
           message.success("Adding is success");
@@ -177,7 +177,7 @@ class ProfilePage extends Component{
       }
       else
       {
-        message.error("Stock and Price cannot be less than 0");
+        message.error("Stock, Volume, Price cannot be less than 0");
       }
 
     }

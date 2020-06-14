@@ -77,8 +77,8 @@ public class LogServiceImpl implements LogService {
                     resultArray[i] = "null";
                 }
             }
-            String author = resultArray[0];
-            String bookName = resultArray[1];
+            String bookName = resultArray[0];
+            String author = resultArray[1];
             String printer = resultArray[2];
             int volume = 0;
             int count = 0;
@@ -88,8 +88,10 @@ public class LogServiceImpl implements LogService {
             if (!resultArray[4].equals("null")) {
                 count = Integer.parseInt(resultArray[4]);
             }
+
             Product product = productDAO.findById(
                     new ProductIDentifier(bookName, printer, author, volume)).orElse(null);
+
             bookCountList.add(new BookCountDTO(product, count));
         }
         return bookCountList;
@@ -138,7 +140,7 @@ public class LogServiceImpl implements LogService {
 
     @Override
     public Integer todayCount() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         return logDAO.findByStartDateAfter(dateFormat.parse(dateFormat.format(date)));
     }
@@ -149,7 +151,7 @@ public class LogServiceImpl implements LogService {
     }
 
     private Integer todayPaymentCount() throws ParseException {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         return paymentDAO.findByStartDateAfter(dateFormat.parse(dateFormat.format(date)));
     }

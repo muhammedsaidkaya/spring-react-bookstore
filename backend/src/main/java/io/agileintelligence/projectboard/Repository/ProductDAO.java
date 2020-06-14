@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductDAO extends JpaRepository<Product, ProductIDentifier> {
@@ -24,5 +25,7 @@ public interface ProductDAO extends JpaRepository<Product, ProductIDentifier> {
 
     @Query(value = "select product FROM Product product WHERE product.cat_id = ?1")
     List<Product> findByCategoryId(int id);
+
+
 }
 

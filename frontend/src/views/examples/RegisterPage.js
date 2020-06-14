@@ -73,29 +73,14 @@ class RegisterPage extends Component {
         message.error("You have entered an invalid email address");
       }
     }
-  };
+  }
+  ;
   changeEmail(e){
     self.setState({email: e});
   };
   changePassword(e){
     self.setState({password: e});
   };
-  setPassword(e){
-    e.preventDefault();
-    if((this.state.email != null) && (this.state.email != ""))
-    {
-      let data = {
-        "email": self.state.email
-      };
-      Api.setPasswordToDefault(data).then(function (response) {
-        message.success("Password is set on to \"Dewamke\"");
-      }).catch(error => {
-        console.log(error);
-      });
-    }else{
-      message.error("You have to enter your email address.");
-    }
-  }
   render() {
   return (
       <>
@@ -125,7 +110,7 @@ class RegisterPage extends Component {
                     <Button
                         className="btn-link"
                         color="danger"
-                        onClick={(e)=>self.setPassword(e)}
+                        type={"submit"}
                     >
                       Forgot password?
                     </Button>

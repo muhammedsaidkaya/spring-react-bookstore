@@ -160,14 +160,16 @@ class CategoriesPage extends Component{
                                     <tr>
                                       <th scope="row">{i}</th>
                                       <th scope="row">
-                                        <Popconfirm
-                                            title="Are you sure delete this user?"
-                                            onConfirm={(e) =>self.sendDelete(e,i)}
-                                            okText="Yes"
-                                            cancelText="No"
-                                        >
-                                          <a href={''}><i className={'fa fa-trash-o'}/></a>
-                                        </Popconfirm>
+                                        {(v.name != "OTHERS") && (
+                                          <Popconfirm
+                                          title="Are you sure delete this user?"
+                                          onConfirm={(e) =>self.sendDelete(e,i)}
+                                          okText="Yes"
+                                          cancelText="No"
+                                      >
+                                        <a href={''}><i className={'fa fa-trash-o'}/></a>
+                                      </Popconfirm>
+                                        )}
                                       </th>
                                       <td>{v.name}</td>
                                     </tr>

@@ -151,12 +151,10 @@ class UserPage extends Component{
     if(
         (this.state.name == "") ||
         (this.state.email == "") ||
-        (this.state.gender == "") ||
         (this.state.brithday == "") ||
         (this.state.region == "") ||
         (this.state.rest == "") ||
-        (this.state.pic == "") ||
-        (this.state.admin == "")
+        (this.state.pic == "")
     )
     {
       message.error("There is at least one requiered field is empty");
@@ -168,7 +166,7 @@ class UserPage extends Component{
       {
         if((this.state.rest.length == 7) && (this.state.rest > 0))
         {
-          Api.updateUser(this.state).then(function (response) {
+          Api.updateUserAdmin(this.state).then(function (response) {
             message.success("Update is success");
             self.setState({
               page: 0,

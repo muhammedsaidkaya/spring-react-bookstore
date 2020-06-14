@@ -270,7 +270,7 @@ class ProfilePage extends Component{
                                     <option value="Chosse">Choose New Status</option>
                                     <option value="Preparing">Preparing</option>
                                     <option value="Shipped">Shipped</option>
-                                    <option value="Shipped">Arrive</option>
+                                    <option value="Arrive">Arrive</option>
                                     <option value="Canceled">Cancel</option>
                                   </Input>
                                 </div>

@@ -221,31 +221,73 @@ class BucketPage extends Component{
         {
           if(this.state.ccCVV.length == 3)
           {
-            if(Number(this.state.ccExp) < 720)
+            let mount = this.state.ccExp.charAt(0) + this.state.ccExp.charAt(1);
+            let year = this.state.ccExp.charAt(2) + this.state.ccExp.charAt(3);
+            if(Number(year) >= 20)
             {
-              if(this.state.selectedAddress != "new")
+              if((Number(year) == 20) && (Number(mount) >= 7))
               {
-                let data = {
-                  "cc":{
-                    "paymentIden":{
-                      "bucket_id": this.state.bucketProducts[0].itemIdentifier.bucket_id,
-                      "user_email":UserInfo.getEmail(),
+                if(this.state.selectedAddress != "new")
+                {
+                  let data = {
+                    "cc":{
+                      "paymentIden":{
+                        "bucket_id": this.state.bucketProducts[0].itemIdentifier.bucket_id,
+                        "user_email":UserInfo.getEmail(),
+                      },
+                      "card_num" : this.state.ccNumber,
+                      "cvc" : Number(this.state.ccCVV)
                     },
-                    "card_num" : this.state.ccNumber,
-                    "cvc" : Number(this.state.ccCVV)
-                  },
-                  "items": this.state.bucketProducts,
-                  "address": this.state.address[this.state.selectedAddress]
-                };
-                Api.payment(data).then(function (response) {
-                  message.success("You have been pay the bill.");
-                  self.setState({
-                    page: 0,
+                    "items": this.state.bucketProducts,
+                    "address": this.state.address[this.state.selectedAddress]
+                  };
+                  Api.payment(data).then(function (response) {
+                    message.success("You have been pay the bill.");
+                    self.setState({
+                      page: 0,
+                    });
+                    self.getBucket();
+                  }).catch(error => {
+                    console.log(error);
                   });
-                  self.getBucket();
-                }).catch(error => {
-                  console.log(error);
-                });
+                }
+                else{
+                  message.error("You have to choosse address");
+                }
+              }
+              else if(Number(year) > 20)
+              {
+                if(this.state.selectedAddress != "new")
+                {
+                  let data = {
+                    "cc":{
+                      "paymentIden":{
+                        "bucket_id": this.state.bucketProducts[0].itemIdentifier.bucket_id,
+                        "user_email":UserInfo.getEmail(),
+                      },
+                      "card_num" : this.state.ccNumber,
+                      "cvc" : Number(this.state.ccCVV)
+                    },
+                    "items": this.state.bucketProducts,
+                    "address": this.state.address[this.state.selectedAddress]
+                  };
+                  Api.payment(data).then(function (response) {
+                    message.success("You have been pay the bill.");
+                    self.setState({
+                      page: 0,
+                    });
+                    self.getBucket();
+                  }).catch(error => {
+                    console.log(error);
+                  });
+                }
+                else{
+                  message.error("You have to choosse address");
+                }
+              }
+              else
+              {
+                message.error("Card Exp Date is Expired.");
               }
             }
             else
