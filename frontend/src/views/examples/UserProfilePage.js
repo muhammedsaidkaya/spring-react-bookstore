@@ -135,6 +135,11 @@ class UserProfilePage extends Component{
         rate: value,
       });
     }
+    else if(type === "password"){
+      self.setState({
+        password: value,
+      });
+    }
   };
   handleSubmitUpdate(e){
     e.preventDefault();
@@ -408,6 +413,16 @@ class UserProfilePage extends Component{
                               <Input type="text" name="pic" id="profilePic" placeholder="Profile Pic" onChange={e => self.change('pic',e.target.value)} defaultValue={this.state.pic}/>
                             </FormGroup>
                           </Col>
+                        </Row>
+                        <Row form>
+                          <Col md={3}/>
+                          <Col md={6}>
+                            <FormGroup>
+                              <Label for="userPhoneRest">New Password (If you dont want to update leave blank)</Label>
+                              <Input type="password" name="rest" id="userPhoneRest" placeholder="Password" onChange={e => self.change('password',e.target.value)}/>
+                            </FormGroup>
+                          </Col>
+                          <Col md={3}/>
                         </Row>
                         <Row form>
                           <Col md={4}>

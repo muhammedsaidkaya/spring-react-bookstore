@@ -78,17 +78,34 @@ const Api = {
     },
     updateUser: function (data) {
         return new Promise((resolve, reject) => {
-            let sendingData =
+            let sendingData = {};
+            if((data.password != null) && (data.password != ""))
             {
-                "email": data.email,
-                "name": data.name,
-                "gender": data.gender,
-                "dob": data.dob,
-                "phone_first3": data.phone_first3,
-                "phone_rest": data.phone_rest,
-                "profil_pic": data.pic,
-                "admin": data.admin,
-            };
+                sendingData =
+                    {
+                        "email": data.email,
+                        "name": data.name,
+                        "gender": data.gender,
+                        "dob": data.dob,
+                        "phone_first3": data.phone_first3,
+                        "phone_rest": data.phone_rest,
+                        "profil_pic": data.pic,
+                        "admin": data.admin,
+                        "password": data.password,
+                    };
+            }else{
+                sendingData =
+                    {
+                        "email": data.email,
+                        "name": data.name,
+                        "gender": data.gender,
+                        "dob": data.dob,
+                        "phone_first3": data.phone_first3,
+                        "phone_rest": data.phone_rest,
+                        "profil_pic": data.pic,
+                        "admin": data.admin,
+                    };
+            }
             console.log(sendingData);
             axios.put(Api.apiUrl() + 'users/updateAccount', sendingData, {headers: this.header()}).then(r => resolve(r)).catch(e => reject(e));
         });
@@ -167,6 +184,11 @@ const Api = {
     getLogs: function () {
         return new Promise((resolve, reject) => {
             axios.get(Api.apiUrl() + 'log/list', {headers: this.header()}).then(r => resolve(r)).catch(e => reject(e));
+        });
+    },
+    setPasswordToDefault: function (data) {
+        return new Promise((resolve, reject) => {
+            axios.post(Api.apiUrl() + 'users/forgetPassword', data, {headers: this.header()}).then(r => resolve(r)).catch(e => reject(e));
         });
     },
     sendLog: function (email) {

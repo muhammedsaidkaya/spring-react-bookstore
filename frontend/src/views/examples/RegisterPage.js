@@ -73,62 +73,79 @@ class RegisterPage extends Component {
         message.error("You have entered an invalid email address");
       }
     }
-  }
-  ;
+  };
   changeEmail(e){
     self.setState({email: e});
   };
   changePassword(e){
     self.setState({password: e});
   };
+  setPassword(e){
+    e.preventDefault();
+    if((this.state.email != null) && (this.state.email != ""))
+    {
+      let data = {
+        "email": self.state.email
+      };
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(data.email)) {
+        Api.setPasswordToDefault(data).then(function (response) {
+          message.success("Password is set on to \"devamke\"");
+        }).catch(error => {
+          console.log(error);
+        });
+      }
+    }else{
+      message.error("You have to enter your email address.");
+    }
+  }
   render() {
-  return (
-      <>
-        <ExamplesNavbar />
-        <div
-            className="page-header"
-            style={{
-              backgroundImage: "url(" + require("assets/img/login-image.jpg") + ")"
-            }}
-        >
-          <div className="filter" />
-          <Container>
-            <Row>
-              <Col className="ml-auto mr-auto" lg="4">
-                <Card className="card-register ml-auto mr-auto">
-                  <h3 className="title mx-auto">Welcome</h3>
-                  <Form className="register-form" onSubmit={(e) => self.handleSubmitLogin(e)}>
-                    <label>Email</label>
-                    <Input placeholder="Email" type="text" onChange={e => self.changeEmail(e.target.value)} />
-                    <label>Password</label>
-                    <Input placeholder="Password" type="password" onChange={e => self.changePassword(e.target.value)} />
-                    <Button block className="btn-round" color="danger">
-                      Login
-                    </Button>
-                  </Form>
-                  <div className="forgot">
-                    <Button
-                        className="btn-link"
-                        color="danger"
-                        type={"submit"}
-                    >
-                      Forgot password?
-                    </Button>
-                  </div>
-                </Card>
-              </Col>
-            </Row>
-          </Container>
-          <div className="footer register-footer text-center">
-            <h6>
-              © {new Date().getFullYear()}, made with{" "}
-              <i className="fa fa-heart heart" /> by Dewamke
-            </h6>
+    return (
+        <>
+          <ExamplesNavbar />
+          <div
+              className="page-header"
+              style={{
+                backgroundImage: "url(" + require("assets/img/login-image.jpg") + ")"
+              }}
+          >
+            <div className="filter" />
+            <Container>
+              <Row>
+                <Col className="ml-auto mr-auto" lg="4">
+                  <Card className="card-register ml-auto mr-auto">
+                    <h3 className="title mx-auto">Welcome</h3>
+                    <Form className="register-form" onSubmit={(e) => self.handleSubmitLogin(e)}>
+                      <label>Email</label>
+                      <Input placeholder="Email" type="text" onChange={e => self.changeEmail(e.target.value)} />
+                      <label>Password</label>
+                      <Input placeholder="Password" type="password" onChange={e => self.changePassword(e.target.value)} />
+                      <Button block className="btn-round" color="danger">
+                        Login
+                      </Button>
+                    </Form>
+                    <div className="forgot">
+                      <Button
+                          className="btn-link"
+                          color="danger"
+                          onClick={(e)=>self.setPassword(e)}
+                      >
+                        Forgot password?
+                      </Button>
+                    </div>
+                  </Card>
+                </Col>
+              </Row>
+            </Container>
+            <div className="footer register-footer text-center">
+              <h6>
+                © {new Date().getFullYear()}, made with{" "}
+                <i className="fa fa-heart heart" /> by Dewamke
+              </h6>
+            </div>
           </div>
-        </div>
-      </>
-  );
-}
+        </>
+    );
+  }
 }
 
 export default RegisterPage;
