@@ -4,5 +4,5 @@ Thanks To :
   Muhammet Eren Taşdemir -
   Ali Kayadibi -
   İhsan Kürşad Ünal -
-  Emre Hancı
-Project Representation : https://www.youtube.com/watch?v=jmdY1d0FTho
+  Emre Hancı<br>
+  Project Representation : https://www.youtube.com/watch?v=jmdY1d0FTho
